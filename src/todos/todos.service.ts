@@ -75,7 +75,6 @@ export class TodosService {
 	}
 	createTodo(todo: CreateTodoDto): Todo {
 		this.catchBadRequest(todo);
-		// todo.id = this.createNewIdForNewTodo()
 		if (!todo.done) {
 			todo.done = false;
 		}

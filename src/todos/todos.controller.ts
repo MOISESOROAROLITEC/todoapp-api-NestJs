@@ -10,8 +10,8 @@ export class TodosController {
 	constructor(private readonly todoService: TodosService) { }
 
 	@Get(":id")
-	findOne(@Param("id") id: string) {
-		return this.todoService.findOne(id);
+	findOne(@Param("id") id: number) {
+		return this.todoService.findOne("" + id);
 	}
 	@Get()
 	findAll(): Todo[] | NotFoundException {
@@ -19,7 +19,6 @@ export class TodosController {
 	}
 	@Post()
 	createOne(@Body() newTodo: CreateTodoDto) {
-		console.log(newTodo);
 		return this.todoService.createTodo(newTodo);
 	}
 	@Patch(":id")
