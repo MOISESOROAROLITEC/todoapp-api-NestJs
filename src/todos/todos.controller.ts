@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } 
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './interfaces/todos.interface';
 import { TodosService } from './todos.service';
+import { log } from 'console';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -16,11 +18,12 @@ export class TodosController {
 		return this.todoService.getAll();
 	}
 	@Post()
-	createOne(@Body() newTodo: CreateTodoDto): Todo {
+	createOne(@Body() newTodo: CreateTodoDto) {
+		console.log(newTodo);
 		return this.todoService.createTodo(newTodo);
 	}
 	@Patch(":id")
-	update(@Param("id") id: string, @Body() todo: CreateTodoDto): Todo | NotFoundException {
+	update(@Param("id") id: string, @Body() todo: UpdateTodoDto): Todo | NotFoundException {
 		return this.todoService.update(id, todo)
 	}
 	@Delete(":id")

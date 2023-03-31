@@ -2,6 +2,8 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { NotFoundError } from 'rxjs';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './interfaces/todos.interface';
+import { title } from 'process';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Injectable()
 export class TodosService {
@@ -51,8 +53,8 @@ export class TodosService {
 		});
 		return id;
 	}
-	catchBadRequest(todo: object) {
-		const availableKeys: string[] = ["id", "title", "description", "done"]
+	catchBadRequest(todo: UpdateTodoDto) {
+		const availableKeys: string[] = ["title", "description", "done"];
 		Object.keys(todo).forEach(key => {
 			if (!availableKeys.includes(key))
 				throw new BadRequestException(`A todo have't '${key}' key. Available keys are : ${[...availableKeys]}`);
@@ -71,18 +73,18 @@ export class TodosService {
 		}
 		return todo;
 	}
-	createTodo(todo: Todo): Todo {
+	createTodo(todo: CreateTodoDto): Todo {
 		this.catchBadRequest(todo);
-		if (!todo.id) {
-			todo.id = this.createNewIdForNewTodo()
-		}
+		// todo.id = this.createNewIdForNewTodo()
 		if (!todo.done) {
 			todo.done = false;
 		}
-		this.todos = [...this.todos, todo];
-		return todo;
+
+		const id = this.createNewIdForNewTodo()
+		this.todos.push({ ...todo, id })
+		return this.todos.find(el => el.id === id);
 	}
-	update(id: string, todo: Todo): Todo | NotFoundException {
+	update(id: string, todo: UpdateTodoDto): Todo | NotFoundException {
 		this.catchBadRequest(todo)
 		const todoToUpdate: Todo = this.todos.find(todo => todo.id == +id);
 		if (!todoToUpdate) {
