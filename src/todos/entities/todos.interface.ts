@@ -1,5 +1,6 @@
 import { Timestemp } from "src/timestemps/timestemp";
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
 @Entity()
 export class Todo extends Timestemp {
@@ -15,5 +16,6 @@ export class Todo extends Timestemp {
 	@Column("boolean", { default: false })
 	done?: boolean;
 
-	user_id: number;
+	@ManyToOne(() => User, user => user.todos)
+	user: User;
 }
