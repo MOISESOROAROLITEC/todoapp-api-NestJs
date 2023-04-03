@@ -15,23 +15,7 @@ export class TodosService {
 		private readonly todoRepository: Repository<Todo>,
 	) { }
 
-	// createNewIdForNewTodo(): number {
-	// 	let id: number = 0;
-	// 	this.todos.forEach(todo => {
-	// 		if (todo.id >= id)
-	// 			id = todo.id + 1;
-	// 	});
-	// 	return id;
-	// }
-	// catchBadRequest(todo: UpdateTodoDto) {
-	// 	const availableKeys: string[] = ["title", "description", "done"];
-	// 	Object.keys(todo).forEach(key => {
-	// 		if (!availableKeys.includes(key))
-	// 			throw new BadRequestException(`A todo have't '${key}' key. Available keys are : ${[...availableKeys]}`);
-	// 	});
-	// }
-
-	getAll()/* : Todo[] | NotFoundException */ {
+	getAll() {
 		return this.todoRepository.find()
 	}
 	async findOne(id: string) {
