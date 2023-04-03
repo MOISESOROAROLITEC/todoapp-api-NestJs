@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { Todo } from './interfaces/todos.interface';
+import { Todo } from './entities/todos.interface';
 import { TodosService } from './todos.service';
 import { log } from 'console';
 import { UpdateTodoDto } from './dto/update-todo.dto';

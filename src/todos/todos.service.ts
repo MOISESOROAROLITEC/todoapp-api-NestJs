@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { NotFoundError } from 'rxjs';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { Todo } from './interfaces/todos.interface';
+import { Todo } from './entities/todos.interface';
 import { title } from 'process';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
