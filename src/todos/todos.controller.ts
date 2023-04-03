@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } 
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './entities/todos.interface';
 import { TodosService } from './todos.service';
-import { log } from 'console';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
