@@ -16,7 +16,11 @@ export class User extends Timestemp {
 	@Column({
 		unique: true
 	})
-	email: string;
+
+	email?: string;
+
+	@Column()
+	phonenumber: string;
 
 	@Column()
 	password: string;
