@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("todos")
+@Entity()
 export class Todo {
 	@PrimaryGeneratedColumn()
 	id: number;
@@ -8,6 +8,6 @@ export class Todo {
 	title: string;
 	@Column()
 	description?: string;
-	@Column("json", { nullable: true })
+	@Column("boolean", { default: false })
 	done?: boolean;
 }

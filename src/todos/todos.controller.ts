@@ -14,7 +14,7 @@ export class TodosController {
 		return this.todoService.findOne("" + id);
 	}
 	@Get()
-	findAll(): Todo[] | NotFoundException {
+	findAll(): Promise<Todo[]> | NotFoundException {
 		return this.todoService.getAll();
 	}
 	@Post()
@@ -22,11 +22,11 @@ export class TodosController {
 		return this.todoService.createTodo(newTodo);
 	}
 	@Patch(":id")
-	update(@Param("id") id: string, @Body() todo: UpdateTodoDto): Todo | NotFoundException {
+	update(@Param("id") id: string, @Body() todo: UpdateTodoDto): Promise<Todo> {
 		return this.todoService.update(id, todo)
 	}
 	@Delete(":id")
-	delet(@Param("id") id: string): { message: string, todo: Todo } | NotFoundException {
+	delet(@Param("id") id: string): Promise<Todo> {
 		return this.todoService.delete(id);
 	}
 }
