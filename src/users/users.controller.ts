@@ -13,7 +13,6 @@ export class UsersController {
 	}
 	@Post("/login")
 	login(@Body() loginInfo: LoginUserDto) {
-		console.log(loginInfo);
 		return this.userService.connection(loginInfo)
 	}
 }

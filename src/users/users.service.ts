@@ -14,7 +14,8 @@ export class UsersService {
 		return this.userRepo.save(user)
 	}
 
-	connection(loginInfo: LoginUserDto) {
-
+	connection({ email, password }: LoginUserDto): Promise<User> {
+		const user = this.userRepo.findOneBy({ email, password });
+		return user;
 	}
 }
