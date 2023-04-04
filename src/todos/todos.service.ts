@@ -12,8 +12,8 @@ export class TodosService {
 		private readonly todoRepository: Repository<Todo>,
 	) { }
 
-	getAll() {
-		return this.todoRepository.find()
+	async getAll() {
+		return await this.todoRepository.find();
 	}
 	async findOne(id: string) {
 		const todo = await this.todoRepository.findOneBy({ id: +id });
@@ -22,9 +22,9 @@ export class TodosService {
 		}
 		return todo;
 	}
-	createTodo(createTodo: CreateTodoDto): Promise<Todo> {
+	createTodo(createTodo: CreateTodoDto) {
 		const todo = this.todoRepository.create(createTodo);
-		return this.todoRepository.save(todo);
+		return this.todoRepository.save(todo, {});
 	}
 	async update(id: string, updateTodo: UpdateTodoDto): Promise<Todo> {
 		const todo = await this.todoRepository.preload({
