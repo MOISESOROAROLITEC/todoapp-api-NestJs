@@ -1,9 +1,6 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsOptional, IsString } from "class-validator";
 
 export class CreateTodoDto {
-	@IsOptional()
-	@IsNumber()
-	id?: number;
 
 	@IsString()
 	title: string;
@@ -14,5 +11,5 @@ export class CreateTodoDto {
 
 	@IsOptional()
 	@IsBoolean()
-	done?: boolean;
+	done?: boolean = false;
 }
