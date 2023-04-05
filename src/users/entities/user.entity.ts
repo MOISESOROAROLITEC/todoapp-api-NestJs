@@ -1,30 +1,29 @@
-import { Timestemp } from "src/timestemps/timestemp";
-import { Todo } from "src/todos/entities/todos.interface";
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Timestemp } from 'src/timestemps/timestemp';
+import { Todo } from 'src/todos/entities/todos.interface';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User extends Timestemp {
-	@PrimaryGeneratedColumn()
-	id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-	@Column()
-	name: string;
+  @Column()
+  name: string;
 
-	@Column()
-	lastname: string;
+  @Column()
+  lastname: string;
 
-	@Column({
-		unique: true
-	})
+  @Column({
+    unique: true,
+  })
+  email?: string;
 
-	email?: string;
+  @Column()
+  phonenumber: string;
 
-	@Column()
-	phonenumber: string;
+  @Column()
+  password: string;
 
-	@Column()
-	password: string;
-
-	@OneToMany(() => Todo, todo => todo.user)
-	todos: Todo[];
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
 }

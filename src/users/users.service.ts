@@ -9,29 +9,32 @@ import { CreateTodoDto } from 'src/todos/dto/create-todo.dto';
 
 @Injectable()
 export class UsersService {
-	constructor(
-		@InjectRepository(User) private readonly userRepo: Repository<User>,
-		@InjectRepository(Todo) private readonly todoRepo: Repository<Todo>
-	) { }
+  constructor(
+    @InjectRepository(User) private readonly userRepo: Repository<User>,
+    @InjectRepository(Todo) private readonly todoRepo: Repository<Todo>,
+  ) {}
 
-	createAcount(signupInfo: SignupUserDto) {
-		const user = this.userRepo.create(signupInfo)
-		return this.userRepo.save(user)
-	}
+  createAcount(signupInfo: SignupUserDto) {
+    const user = this.userRepo.create(signupInfo);
+    return this.userRepo.save(user);
+  }
 
-	async connection({ email, password }: LoginUserDto): Promise<User> {
-		const user = await this.userRepo.findOneBy({ email, password });
-		if (!user) {
-			throw new NotFoundException(`user with email : ${email} not found`);
-		}
-		return user;
-	}
-	async createTodo(userId: string, createTodoDto: CreateTodoDto) {
-		const user = await this.userRepo.findOneBy({ id: +userId });
-		if (!user) {
-			throw new NotFoundException(`user with id : ${userId} is not found`);
-		}
-		const todo = this.todoRepo.create({ ...createTodoDto, user });
-		return await this.todoRepo.save(todo)
-	}
+  async connection({ email, password }: LoginUserDto): Promise<User> {
+    const user = await this.userRepo.findOneBy({ email, password });
+    if (!user) {
+      throw new NotFoundException(`user with email : ${email} not found`);
+    }
+    return user;
+  }
+  async createTodo(userId: string, createTodoDto: CreateTodoDto) {
+    const user = await this.userRepo.findOneBy({ id: +userId });
+    if (!user) {
+      throw new NotFoundException(`user with id : ${userId} is not found`);
+    }
+    const todo = this.todoRepo.create({ ...createTodoDto, user });
+    return await this.todoRepo.save(todo);
+  }
+  getUsers() {
+    return this.userRepo.find();
+  }
 }

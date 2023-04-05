@@ -1,12 +1,12 @@
-import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 
 export class Timestemp {
-	@CreateDateColumn()
-	createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-	@UpdateDateColumn()
-	updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-	@DeleteDateColumn()
-	removedAt: Date;
+  @DeleteDateColumn()
+  removedAt: Date;
 }
